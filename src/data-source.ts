@@ -3,6 +3,7 @@ import { DataSource } from "typeorm"
 import { User } from "./entity/User"
 import { City } from "./entity/City"
 import { Owner } from "./entity/Owner"
+import { Building } from "./entity/Building"
 try {
     
 } catch (error) {
@@ -17,7 +18,7 @@ export const AppDataSource = new DataSource({
     database: "bs-office23",
     synchronize: true,
     logging: false,
-    entities: [User,City, Owner],
+    entities: [User,City, Owner,Building],
     migrations: [],
     subscribers: [],
 })

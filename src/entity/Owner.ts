@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index , ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, Index , ManyToOne, JoinTable, ManyToMany } from "typeorm"
 import { User } from "./User"
+import { Building } from "./Building"
 
 @Entity()
 export class Owner {
@@ -30,5 +31,9 @@ export class Owner {
 
     @ManyToOne(() => User, (user)   => user.owners)
     user: User
+   
+    @ManyToMany(() => Building)
+    @JoinTable()
+    buildings: Building[]
 
 }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index , OneToMany} from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, Index , OneToMany,ManyToMany} from "typeorm"
 import { Owner } from "./Owner"
 
 
@@ -36,5 +36,6 @@ export class User {
 
     @OneToMany(() => Owner, (owner) => owner.user)
     owners: Owner[]
+  
 
 }   
