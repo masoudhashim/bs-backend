@@ -1,5 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, Index , OneToMany , ManyToOne,ManyToMany ,JoinTable} from "typeorm"
 import { Owner } from "./Owner"
+import { Unit } from "./Unit"
+import { Deed } from "./Deed"
+import { Representative } from "./Representative"
+import { User } from "./User"
+import { Contract } from "./Contract"
 
 @Entity()
 export class Building { 
@@ -32,11 +37,11 @@ export class Building {
     @Column({ nullable: true })
     building_deed: string
 
-    @Column({ nullable: true })
-    number_of_units: string
+    @Column({ nullable: false })
+    water_No: string
 
     @Column({ nullable: true })
-    number_of_floors: string
+    number_of_units: string
 
     @Column({ nullable: true })
     number_of_elevators: string
@@ -57,6 +62,24 @@ export class Building {
      @ManyToMany(() => Owner)
      @JoinTable()
      owners: Owner[]
+    
+     @ManyToMany(() => Representative)
+     @JoinTable()
+     Representatives: Representative[]
+
+    @ManyToMany(() => Contract)
+    @JoinTable()
+    contracts: Contract[]
+
+     @OneToMany(() => Deed, (deed) => deed.building)
+     deeds: Deed[]
+     @OneToMany(() => Contract, (Contract) => Contract.building)
+     contracts: Contract[]
+     @OneToMany(() => Unit, (unit) => unit.building)
+     units: Unit[]
+    
+    @ManyToOne(()=> User, (user)=> user.buildings )
+    user: User
 
 }
 
