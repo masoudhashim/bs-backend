@@ -2,12 +2,11 @@ import { Entity, PrimaryGeneratedColumn, Column, Index , ManyToOne, JoinTable, M
 import { User } from "./User"
 import { Building } from "./Building"
 import { Unit } from "./Unit"
-import { Representative } from "./Representative"
-import { Deed } from "./Deed"
+import { Owner } from "./Owner"
 import { Contract } from "./Contract"
 
 @Entity()
-export class Owner {
+export class Representative {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -44,29 +43,26 @@ export class Owner {
     @Index()
     email:string
 
-    @ManyToOne(() => User, (user)   => user.owners)
+    @ManyToOne(() => User, (user)   => user.representatives)
     user: User
    
     @ManyToMany(() => Building)
     @JoinTable()
     buildings: Building[]
-   
-    @ManyToMany(() =>  Contract)
-    @JoinTable()
-    contracts: Contract[]
 
 
     @ManyToMany(() => Unit)
     @JoinTable()
     units: Unit[]
 
-    @ManyToMany(() => Deed)
+
+    @ManyToMany(() => Unit)
     @JoinTable()
-    deeds: Deed[]
+    owners: Owner[]
 
 
-    @ManyToMany(() => Representative)
+    @ManyToMany(() => Contract)
     @JoinTable()
-    representatives: Representative[]
+    contracts: Contract[]
 
 }
